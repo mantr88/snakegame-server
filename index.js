@@ -6,7 +6,7 @@ const sequelize = require("./db");
 const Player = require("./player_model");
 
 const app = express();
-app.use(cors({ origin: "*" }));
+app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 8080;
