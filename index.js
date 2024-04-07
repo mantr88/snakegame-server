@@ -33,7 +33,7 @@ app.post("/players", async function (req, res) {
 
     res.status(201).json({ message: "New user successfully created!", player });
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 });
 
@@ -62,7 +62,7 @@ app.patch("/players/:id", async function (req, res) {
       message: `Score of player ${player.name} update successful.`,
     });
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 });
 
@@ -71,7 +71,7 @@ app.get("/players", async (req, res) => {
     const players = await Player.findAll();
     res.status(200).json({ players });
   } catch (error) {
-    throw new Error(error);
+    console.log(error);
   }
 });
 const start = async () => {
