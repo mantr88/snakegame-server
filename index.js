@@ -19,6 +19,12 @@ app.post("/players", async function (req, res) {
   try {
     const { name } = req.body;
 
+    if (!name) {
+      return res
+        .status(400)
+        .json({ message: "You do not send necessary field" });
+    }
+
     const newPlayer = await Player.create({ ...req.body });
   } catch (error) {
     throw new Error(error);
@@ -30,11 +36,18 @@ app.patch("/players/:id", async function (req, res) {
   try {
     const { id } = req.params;
     const { score } = req.body;
+    console.log("score: ", score);
 
     const player = await Player.findOne({ where: { id } });
 
     if (!player) {
       return res.status(404).json({ message: "Player not found" });
+    }
+
+    if (!score) {
+      return res
+        .status(400)
+        .json({ message: "You do not send necessary field" });
     }
 
     player.score = score;
