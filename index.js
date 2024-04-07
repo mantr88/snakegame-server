@@ -25,11 +25,16 @@ app.post("/players", async function (req, res) {
         .json({ message: "You do not send necessary field" });
     }
 
-    const newPlayer = await Player.create({ ...req.body });
+    const player = await Player.create({ ...req.body });
+
+    if (!player) {
+      return res.status(500).json({ message: "Internal server error" });
+    }
+
+    res.status(201).json({ message: "New user successfully created!", player });
   } catch (error) {
     throw new Error(error);
   }
-  res.status(201).json({ message: "New user successfully created!" });
 });
 
 app.patch("/players/:id", async function (req, res) {
